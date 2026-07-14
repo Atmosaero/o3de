@@ -517,7 +517,7 @@ void AzAssetBrowserWindow::RegisterViewClass()
 
     options.showInMenu = false;
     const QString name = QString("%1 (2)").arg(LyViewPane::AssetBrowser);
-    AzToolsFramework::RegisterViewPane<AzAssetBrowserWindow>(qPrintable(name), LyViewPane::CategoryTools, options);
+    AzToolsFramework::RegisterViewPane<AzAssetBrowserWindow>(qUtf8Printable(name), LyViewPane::CategoryTools, options);
 }
 
 QObject* AzAssetBrowserWindow::createListenerForShowAssetEditorEvent(QObject* parent)
@@ -1165,5 +1165,3 @@ void AzAssetBrowserWindow::SelectionChanged(const QItemSelection& selected, [[ma
     // Note the above code SHOULD early return if more cases appear.
     AssetBrowserPreviewRequestBus::Broadcast(&AssetBrowserPreviewRequest::ClearPreview);
 }
-
-#include <AzAssetBrowser/moc_AzAssetBrowserWindow.cpp>
