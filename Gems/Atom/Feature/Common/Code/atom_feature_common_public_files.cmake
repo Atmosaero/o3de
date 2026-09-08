@@ -111,6 +111,9 @@ set(FILES
     Include/Atom/Feature/PostProcess/Vignette/VignetteConstants.h
     Include/Atom/Feature/PostProcess/Vignette/VignetteParams.inl
     Include/Atom/Feature/PostProcess/Vignette/VignetteSettingsInterface.h
+    Include/Atom/Feature/PostProcess/Outline/OutlineConstants.h
+    Include/Atom/Feature/PostProcess/Outline/OutlineParams.inl
+    Include/Atom/Feature/PostProcess/Outline/OutlineSettingsInterface.h
     Include/Atom/Feature/PostProcess/WhiteBalance/WhiteBalanceConstants.h
     Include/Atom/Feature/PostProcess/WhiteBalance/WhiteBalanceParams.inl
     Include/Atom/Feature/PostProcess/WhiteBalance/WhiteBalanceSettingsInterface.h

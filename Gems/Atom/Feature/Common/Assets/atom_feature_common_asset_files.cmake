@@ -251,6 +251,7 @@ set(FILES
     Passes/UI.pass
     Passes/UIParent.pass
     Passes/Vignette.pass
+    Passes/Outline.pass
     Passes/WhiteBalance.pass
     Scripts/material_find_overrides_demo.lua
     Scripts/material_property_overrides_demo.lua
@@ -639,6 +640,8 @@ set(FILES
     Shaders/PostProcessing/UniformColor.shader
     Shaders/PostProcessing/Vignette.azsl
     Shaders/PostProcessing/Vignette.shader
+    Shaders/PostProcessing/Outline.azsl
+    Shaders/PostProcessing/Outline.shader
     Shaders/PostProcessing/WhiteBalance.azsl
     Shaders/PostProcessing/WhiteBalance.shader
     Shaders/Reflections/ReflectionCommon.azsli

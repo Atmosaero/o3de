@@ -76,6 +76,8 @@ set(FILES
     Source/PostProcess/WhiteBalance/EditorWhiteBalanceComponent.h
     Source/PostProcess/Vignette/EditorVignetteComponent.cpp
     Source/PostProcess/Vignette/EditorVignetteComponent.h
+    Source/PostProcess/Outline/EditorOutlineComponent.cpp
+    Source/PostProcess/Outline/EditorOutlineComponent.h
     Source/PostProcess/ColorGrading/EditorHDRColorGradingComponent.cpp
     Source/PostProcess/ColorGrading/EditorHDRColorGradingComponent.h
     Source/PostProcess/DepthOfField/EditorDepthOfFieldComponent.cpp

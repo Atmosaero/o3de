@@ -50,6 +50,8 @@ set(FILES
     Include/AtomLyIntegration/CommonFeatures/PostProcess/WhiteBalance/WhiteBalanceComponentConfig.h
     Include/AtomLyIntegration/CommonFeatures/PostProcess/Vignette/VignetteBus.h
     Include/AtomLyIntegration/CommonFeatures/PostProcess/Vignette/VignetteComponentConfig.h
+    Include/AtomLyIntegration/CommonFeatures/PostProcess/Outline/OutlineBus.h
+    Include/AtomLyIntegration/CommonFeatures/PostProcess/Outline/OutlineComponentConfig.h
     Include/AtomLyIntegration/CommonFeatures/PostProcess/DepthOfField/DepthOfFieldBus.h
     Include/AtomLyIntegration/CommonFeatures/PostProcess/DepthOfField/DepthOfFieldComponentConfig.h
     Include/AtomLyIntegration/CommonFeatures/PostProcess/DisplayMapper/DisplayMapperComponentBus.h

@@ -645,6 +645,10 @@
                 "Path": "Passes/Vignette.pass"
             },
             {
+                "Name": "OutlineTemplate",
+                "Path": "Passes/Outline.pass"
+            },
+            {
                 "Name": "SplashScreenPassTemplate",
                 "Path": "Passes/SplashScreen.pass"
             },

@@ -80,6 +80,7 @@
 #include <PostProcessing/SubsurfaceScatteringPass.h>
 #include <PostProcessing/TaaPass.h>
 #include <PostProcessing/VignettePass.h>
+#include <PostProcessing/OutlinePass.h>
 #include <PostProcessing/WhiteBalancePass.h>
 #include <RayTracing/RayTracingFeatureProcessor.h>
 #include <ScreenSpace/DeferredFogPass.h>
@@ -319,6 +320,8 @@ namespace AZ
 
             // Add Vignette
             passSystem->AddPassCreator(Name("VignettePass"), &VignettePass::Create);
+            // Add Outline
+            passSystem->AddPassCreator(Name("OutlinePass"), &OutlinePass::Create);
 
             // Add Luminance Histogram pass
             passSystem->AddPassCreator(Name("LuminanceHistogramGeneratorPass"), &LuminanceHistogramGeneratorPass::Create);

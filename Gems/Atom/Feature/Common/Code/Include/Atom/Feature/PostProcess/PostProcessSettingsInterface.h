@@ -16,6 +16,7 @@
 #include <Atom/Feature/PostProcess/FilmGrain/FilmGrainSettingsInterface.h>
 #include <Atom/Feature/PostProcess/WhiteBalance/WhiteBalanceSettingsInterface.h>
 #include <Atom/Feature/PostProcess/Vignette/VignetteSettingsInterface.h>
+#include <Atom/Feature/PostProcess/Outline/OutlineSettingsInterface.h>
 #include <Atom/Feature/PostProcess/DepthOfField/DepthOfFieldSettingsInterface.h>
 #include <Atom/Feature/PostProcess/ExposureControl/ExposureControlSettingsInterface.h>
 #include <Atom/Feature/PostProcess/AmbientOcclusion/AoSettingsInterface.h>

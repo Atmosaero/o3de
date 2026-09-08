@@ -1,0 +1,112 @@
+/*
+ * Copyright (c) Contributors to the Open 3D Engine Project.
+ * For complete copyright and license terms please see the LICENSE at the root of this distribution.
+ *
+ * SPDX-License-Identifier: Apache-2.0 OR MIT
+ *
+ */
+
+#include <viewsrg_all.srgi>
+
+ShaderResourceGroup PassSrg : SRG_PerPass
+{
+    Texture2D<float4> m_inputColor;
+    Texture2D<float> m_depth;
+    RWTexture2D<float4> m_outputColor;
+
+    struct Constants
+    {
+        uint2 m_outputSize;
+        float m_thickness;
+        float m_depthThreshold;
+        float3 m_color;
+        float m_opacity;
+    };
+    Constants m_constants;
+}
+
+float ReadDepth(int2 pixel)
+{
+    // Map output pixels to depth pixels: the post-process chain can change resolution.
+    uint width, height;
+    PassSrg::m_depth.GetDimensions(width, height);
+    float2 uv = (float2(pixel) + 0.5) / float2(PassSrg::m_constants.m_outputSize);
+    int2 depthPixel = clamp(int2(uv * float2(width, height)), int2(0, 0), int2(width, height) - 1);
+    float depth = PassSrg::m_depth.Load(int3(depthPixel, 0));
+    return depth;
+}
+
+float DepthEdge(float center, float a, float b)
+{
+    // Reverse depth is affine on a projected plane. Its second difference suppresses
+    // flat, sloping surfaces without requiring a normals attachment.
+    // A zero sample is the reverse-Z clear value (sky), including infinite far planes.
+    if (center == 0.0)
+    {
+        return 0.0;
+    }
+    if (a == 0.0 || b == 0.0)
+    {
+        return 2.0;
+    }
+    // Keep the nearer side of a depth break. Drawing both sides expands silhouettes
+    // into the background and makes small, distant objects appear disproportionately thick.
+    float curvature = max(2.0 * center - a - b, 0.0);
+    // Convert the depth-buffer difference to a relative view-depth difference using
+    // the projection matrix. This also supports orthographic cameras and finite far planes.
+    float4 view = mul(ViewSrg::m_projectionMatrixInverse, float4(0.0, 0.0, center, 1.0));
+    float4 derivative = mul(ViewSrg::m_projectionMatrixInverse, float4(0.0, 0.0, 1.0, 0.0));
+    float relativeScale = abs(derivative.z * view.w - view.z * derivative.w)
+        / max(abs(view.z * view.w), 1e-8);
+    return curvature * relativeScale;
+}
+
+float DirectionEdge(int2 pixel, int2 offset, float center)
+{
+    int2 size = int2(PassSrg::m_constants.m_outputSize);
+    // A clamped sample would introduce artificial curvature at the screen border.
+    if (any(pixel + offset < 0) || any(pixel + offset >= size)
+        || any(pixel - offset < 0) || any(pixel - offset >= size))
+    {
+        return 0.0;
+    }
+    return DepthEdge(center, ReadDepth(pixel + offset), ReadDepth(pixel - offset));
+}
+
+float DirectionCoverage(int2 pixel, int2 direction, float radius, float center)
+{
+    int innerRadius = int(floor(radius));
+    float fraction = frac(radius);
+    float threshold = PassSrg::m_constants.m_depthThreshold;
+    float inner = smoothstep(threshold, threshold * 2.0,
+        DirectionEdge(pixel, direction * innerRadius, center));
+    if (fraction == 0.0)
+    {
+        return inner;
+    }
+    float outer = smoothstep(threshold, threshold * 2.0,
+        DirectionEdge(pixel, direction * (innerRadius + 1), center));
+    // Blend coverage, not depth: interpolating across a depth break invents surfaces.
+    return lerp(inner, outer, fraction);
+}
+
+[numthreads(8, 8, 1)]
+void MainCS(uint3 dispatchThreadID : SV_DispatchThreadID)
+{
+    if (any(dispatchThreadID.xy >= PassSrg::m_constants.m_outputSize))
+    {
+        return;
+    }
+    int2 pixel = int2(dispatchThreadID.xy);
+    float radius = PassSrg::m_constants.m_thickness;
+    float center = ReadDepth(pixel);
+    float coverage = DirectionCoverage(pixel, int2(1, 0), radius, center);
+    coverage = max(coverage, DirectionCoverage(pixel, int2(0, 1), radius, center));
+    // Diagonal offsets cover sqrt(2) times the distance of axial offsets.
+    float diagonalRadius = radius * 0.70710678;
+    coverage = max(coverage, DirectionCoverage(pixel, int2(1, 1), diagonalRadius, center));
+    coverage = max(coverage, DirectionCoverage(pixel, int2(1, -1), diagonalRadius, center));
+    coverage *= PassSrg::m_constants.m_opacity;
+    float4 color = PassSrg::m_inputColor.Load(int3(pixel, 0));
+    PassSrg::m_outputColor[pixel] = float4(lerp(color.rgb, PassSrg::m_constants.m_color, coverage), color.a);
+}

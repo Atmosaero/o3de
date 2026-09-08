@@ -41,6 +41,7 @@
 #include <PostProcess/FilmGrain/FilmGrainComponent.h>
 #include <PostProcess/WhiteBalance/WhiteBalanceComponent.h>
 #include <PostProcess/Vignette/VignetteComponent.h>
+#include <PostProcess/Outline/OutlineComponent.h>
 #include <ScreenSpace/DeferredFogComponent.h>
 #include <SkyBox/HDRiSkyboxComponent.h>
 #include <SkyBox/PhysicalSkyComponent.h>
@@ -83,6 +84,7 @@
 #include <PostProcess/FilmGrain/EditorFilmGrainComponent.h>
 #include <PostProcess/WhiteBalance/EditorWhiteBalanceComponent.h>
 #include <PostProcess/Vignette/EditorVignetteComponent.h>
+#include <PostProcess/Outline/EditorOutlineComponent.h>
 #include <ScreenSpace/EditorDeferredFogComponent.h>
 #include <SkyBox/EditorHDRiSkyboxComponent.h>
 #include <SkyBox/EditorPhysicalSkyComponent.h>
@@ -142,6 +144,7 @@ namespace AZ
                         FilmGrainComponent::CreateDescriptor(),
                         WhiteBalanceComponent::CreateDescriptor(),
                         VignetteComponent::CreateDescriptor(),
+                        OutlineComponent::CreateDescriptor(),
                         CubeMapCaptureComponent::CreateDescriptor(),
 
 #ifdef ATOMLYINTEGRATION_FEATURE_COMMON_EDITOR
@@ -184,6 +187,7 @@ namespace AZ
                         EditorFilmGrainComponent::CreateDescriptor(),
                         EditorWhiteBalanceComponent::CreateDescriptor(),
                         EditorVignetteComponent::CreateDescriptor(),
+                        EditorOutlineComponent::CreateDescriptor(),
                         EditorCubeMapCaptureComponent::CreateDescriptor(),
 #endif
                     });

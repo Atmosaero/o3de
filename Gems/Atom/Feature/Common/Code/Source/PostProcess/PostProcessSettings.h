@@ -24,6 +24,7 @@
 #include <PostProcess/FilmGrain/FilmGrainSettings.h>
 #include <PostProcess/WhiteBalance/WhiteBalanceSettings.h>
 #include <PostProcess/Vignette/VignetteSettings.h>
+#include <PostProcess/Outline/OutlineSettings.h>
 #include <ScreenSpace/DeferredFogSettings.h>
 
 namespace AZ

@@ -216,6 +216,10 @@ set(FILES
     Source/PostProcessing/PaniniProjectionPass.cpp
     Source/PostProcessing/VignettePass.h
     Source/PostProcessing/VignettePass.cpp
+    Source/PostProcess/Outline/OutlineSettings.cpp
+    Source/PostProcess/Outline/OutlineSettings.h
+    Source/PostProcessing/OutlinePass.h
+    Source/PostProcessing/OutlinePass.cpp
     Source/PostProcessing/DepthOfFieldCompositePass.h
     Source/PostProcessing/DepthOfFieldCompositePass.cpp
     Source/PostProcessing/DepthOfFieldBokehBlurPass.h

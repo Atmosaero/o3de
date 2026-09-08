@@ -119,6 +119,11 @@ set(FILES
     Source/PostProcess/Vignette/VignetteComponentConfig.cpp
     Source/PostProcess/Vignette/VignetteComponentController.cpp
     Source/PostProcess/Vignette/VignetteComponentController.h
+    Source/PostProcess/Outline/OutlineComponent.cpp
+    Source/PostProcess/Outline/OutlineComponent.h
+    Source/PostProcess/Outline/OutlineComponentConfig.cpp
+    Source/PostProcess/Outline/OutlineComponentController.cpp
+    Source/PostProcess/Outline/OutlineComponentController.h
     Source/PostProcess/ColorGrading/HDRColorGradingComponent.cpp
     Source/PostProcess/ColorGrading/HDRColorGradingComponent.h
     Source/PostProcess/ColorGrading/HDRColorGradingComponentConfig.cpp

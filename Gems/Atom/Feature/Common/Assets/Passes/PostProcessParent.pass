@@ -239,13 +239,33 @@
 		            ]
 		        },
                 {
+                    "Name": "OutlinePass",
+                    "TemplateName": "OutlineTemplate",
+                    "Connections": [
+                        {
+                            "LocalSlot": "Input",
+                            "AttachmentRef": {
+                                "Pass": "ChromaticAberrationPass",
+                                "Attachment": "Output"
+                            }
+                        },
+                        {
+                            "LocalSlot": "Depth",
+                            "AttachmentRef": {
+                                "Pass": "Parent",
+                                "Attachment": "Depth"
+                            }
+                        }
+                    ]
+                },
+                {
                     "Name": "PaniniProjectionPass",
                     "TemplateName": "PaniniProjectionTemplate",
                     "Connections": [
                         {
                             "LocalSlot": "Input",
                             "AttachmentRef": {
-                                "Pass": "ChromaticAberrationPass",
+                                "Pass": "OutlinePass",
                                 "Attachment": "Output"
                             }
                         }

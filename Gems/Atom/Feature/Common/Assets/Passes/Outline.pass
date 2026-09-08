@@ -1,0 +1,84 @@
+{
+    "Type": "JsonSerialization",
+    "Version": 1,
+    "ClassName": "PassAsset",
+    "ClassData": {
+        "PassTemplate": {
+            "Name": "OutlineTemplate",
+            "PassClass": "OutlinePass",
+            "Slots": [
+                {
+                    "Name": "Input",
+                    "SlotType": "Input",
+                    "ScopeAttachmentUsage": "Shader",
+                    "ShaderInputName": "m_inputColor"
+                },
+                {
+                    "Name": "Depth",
+                    "SlotType": "Input",
+                    "ShaderInputName": "m_depth",
+                    "ScopeAttachmentUsage": "Shader",
+                    "ImageViewDesc": {
+                        "AspectFlags": [
+                            "Depth"
+                        ]
+                    }
+                },
+                {
+                    "Name": "Output",
+                    "SlotType": "Output",
+                    "ScopeAttachmentUsage": "Shader",
+                    "LoadStoreAction": {
+                        "LoadAction": "Clear"
+                    },
+                    "ShaderInputName": "m_outputColor"
+                }
+            ],
+            "ImageAttachments": [
+                {
+                    "Name": "Outline",
+                    "SizeSource": {
+                        "Source": {
+                            "Pass": "This",
+                            "Attachment": "Input"
+                        }
+                    },
+                    "FormatSource": {
+                        "Pass": "This",
+                        "Attachment": "Input"
+                    },
+                    "ImageDescriptor": {
+                        "SharedQueueMask": "Graphics",
+                        "BindFlags": [
+                            "Color",
+                            "ShaderReadWrite"
+                        ]
+                    }
+                }
+            ],
+            "Connections": [
+                {
+                    "LocalSlot": "Output",
+                    "AttachmentRef": {
+                        "Pass": "This",
+                        "Attachment": "Outline"
+                    }
+                }
+            ],
+            "FallbackConnections": [
+                {
+                    "Input": "Input",
+                    "Output": "Output"
+                }
+            ],
+            "PassData": {
+                "$type": "ComputePassData",
+                "BindViewSrg": true,
+                "ShaderAsset": {
+                    "FilePath": "Shaders/PostProcessing/Outline.shader"
+                },
+                "FullscreenDispatch": true
+            }
+        }
+    }
+}
