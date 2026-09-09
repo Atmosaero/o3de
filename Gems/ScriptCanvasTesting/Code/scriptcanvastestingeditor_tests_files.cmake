@@ -16,6 +16,7 @@ set(FILES
     Source/Framework/ScriptCanvasTestApplication.h
     Source/Framework/EntityRefTests.h
     Tests/ScriptCanvasTestingTest.cpp
+    Tests/ScriptCanvas_AssetId.cpp
     Tests/ScriptCanvas_ContainerSupport.cpp
     Tests/ScriptCanvas_Core.cpp
     Tests/ScriptCanvas_EventHandlers.cpp

@@ -36,6 +36,10 @@ namespace ScriptCanvas
         AZ_Error("Script Canvas", it.second, "Cannot register a second Trait struct with the same ScriptCanvas type(%u)", it.first->first);
         dataRegistry.m_creatableTypes.try_emplace(it.first->second.m_dataTraits.GetSCType());
 
+        it = dataRegistry.m_typeIdTraitMap.emplace(Data::eType::AssetId, Data::MakeTypeErasedTraits<Data::eType::AssetId>());
+        AZ_Error("Script Canvas", it.second, "Cannot register a second Trait struct with the same ScriptCanvas type(%u)", it.first->first);
+        dataRegistry.m_creatableTypes.try_emplace(it.first->second.m_dataTraits.GetSCType());
+
         it = dataRegistry.m_typeIdTraitMap.emplace(Data::eType::EntityID, Data::MakeTypeErasedTraits<Data::eType::EntityID>());
         AZ_Error("Script Canvas", it.second, "Cannot register a second Trait struct with the same ScriptCanvas type(%u)", it.first->first);
         dataRegistry.m_creatableTypes.try_emplace(it.first->second.m_dataTraits.GetSCType());

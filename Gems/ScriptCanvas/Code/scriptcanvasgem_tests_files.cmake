@@ -8,6 +8,7 @@
 
 set(FILES
     Tests/AutoGen/ScriptCanvasAutoGenRegistryTest.cpp
+    Tests/Data/AssetIdDataRegistryTest.cpp
     Tests/Data/DataTypeTest.cpp
     Tests/Data/DataTypeUtilsTest.cpp
     Tests/Framework/ScriptCanvasUnitTestFixture.h
